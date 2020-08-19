@@ -1,0 +1,75 @@
+@import "variables";
+@import "reset";
+
+body {
+  font-family: $font-family;
+  font-size: $font-size;
+  color: $text-color;
+  background-color: $bg-color;
+  margin-top: $spacer;
+
+  transition: 0.1s background-color linear;
+  &.focus {
+    background-color: #f98e8a;
+  }
+}
+
+h1 {
+  font-size: $font-size * 2.5;
+  margin-bottom: $spacer * 1.5;
+}
+
+.container {
+  margin-left: $spacer;
+  margin-right: $spacer;
+}
+
+.text-center {
+  text-align: center;
+}
+
+@mixin form-item {
+  padding: $spacer;
+  background: inherit;
+  border: 2px solid;
+  border-color: inherit;
+}
+
+form.autocomplete {
+  background-color: $bg-color;
+  border-color: $text-color;
+
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 600px;
+
+  input[type="search"] {
+    @include form-item;
+    float: left;
+    width: 80%;
+    outline: none;
+
+    &::-webkit-search-cancel-button {
+      -webkit-appearance: none;
+      cursor: pointer;
+      height: 20px;
+      width: 20px;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 13 13'><polyline class='arrow' fill='none' stroke='currentColor' points='1 1,6.5 6.5,12 1'/><polyline class='arrow' fill='none' stroke='currentColor' points='1 12,6.5 6.5,12 12'/></svg>");
+    }
+  }
+
+  button[type="submit"] {
+    @include form-item;
+    cursor: pointer;
+    float: right;
+    width: 20%;
+    border-left: none;
+    text-transform: uppercase;
+    transition: 0.1s background-color linear, 0.1s color linear;
+
+    &:hover {
+      color: $bg-color;
+      background: $text-color;
+    }
+  }
+}
