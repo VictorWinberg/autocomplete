@@ -1,0 +1,11 @@
+/** Functions **/
+
+$breakpoint: map-get($breakpoints, sm);
+
+@mixin media-breakpoint-up($breakpoint) {
+  $breakpoint-value: map-get($breakpoints, $breakpoint);
+
+  @media (min-width: $breakpoint-value) {
+    @content;
+  }
+}

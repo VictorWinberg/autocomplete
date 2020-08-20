@@ -9,5 +9,8 @@ Vue.config.productionTip = false;
 
 new Vue({
   store,
+  beforeCreate(): void {
+    this.$store.commit("initialiseStore");
+  },
   render: (h): VNode => h(App)
 }).$mount("#app");

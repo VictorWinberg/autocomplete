@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <div class="container">
-      <h1 class="text-center">Jayway - Autocomplete</h1>
-      <autocomplete-input />
-      <autocomplete-dropdown />
-    </div>
+    <h1 class="text-center my-2">Jayway - Autocomplete</h1>
+    <autocomplete-input />
+    <autocomplete-dropdown />
+    <div class="flex-grow"></div>
+    <autocomplete-items />
   </div>
 </template>
 
@@ -12,11 +12,23 @@
 import Vue from "vue";
 import AutocompleteInput from "@/components/AutocompleteInput.vue";
 import AutocompleteDropdown from "@/components/AutocompleteDropdown.vue";
+import AutocompleteItems from "@/components/AutocompleteItems.vue";
 
 export default Vue.extend({
   name: "App",
-  components: { AutocompleteInput, AutocompleteDropdown }
+  components: { AutocompleteInput, AutocompleteDropdown, AutocompleteItems }
 });
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  .flex-grow {
+    min-height: $spacer;
+    flex-grow: 1;
+  }
+}
+</style>

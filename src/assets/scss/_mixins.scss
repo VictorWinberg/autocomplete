@@ -1,0 +1,11 @@
+/** Mixins **/
+
+@mixin autocomplete-item {
+  display: block;
+  position: relative;
+  padding: $spacer;
+  background: inherit;
+  border: 2px solid;
+  border-color: inherit;
+  box-sizing: border-box;
+}

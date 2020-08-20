@@ -1,7 +1,24 @@
 /** Variables **/
 
-$font-family: "Avenir", Helvetica, Arial, sans-serif;
+$font-family: "Roboto", sans-serif;
 $font-size: 16px;
+$font-weight: 300;
+$header-font-weight: 100;
+$bold-font-weight: 500;
+$letter-spacing: 0.01em;
+
 $bg-color: white;
+$bg-focus-color: #f98e8a;
 $text-color: black;
+$box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 0.75);
+
 $spacer: 1rem;
+
+$autocomplete-max-width: 600px;
+
+$breakpoints: (
+  xs: 576px,
+  sm: 768px,
+  md: 992px,
+  lg: 1200px
+);
