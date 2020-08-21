@@ -2,7 +2,7 @@
   <div class="container">
     <ul>
       <li v-for="item in items" :key="item.url" class="autocomplete-item">
-        <a class="close" @click="() => removeItem(item)"></a>
+        <a href="#" class="close" @click="() => removeItem(item)"></a>
         <div v-for="[key, value] in Object.entries(item)" :key="key">
           <div v-if="key === 'resource'" class="absolute-bottom-right">
             <h1>{{ value }}</h1>
@@ -29,9 +29,6 @@ export default Vue.extend({
   methods: {
     ...mapActions(["removeItem"]),
     titleCase,
-    onRemove(event: Event) {
-      event.preventDefault();
-    },
     formatValue(key: string, value: string | number) {
       if (key === "date") {
         return dayjs(value).format("MMMM D, YYYY h:mm A");
@@ -47,6 +44,7 @@ export default Vue.extend({
   @include autocomplete-item;
   position: relative;
   border-bottom: none;
+  background-color: lighten($bg-focus-color, 10%);
 }
 
 a.close {

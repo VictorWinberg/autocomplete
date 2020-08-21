@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    hideDropdown: true,
     search: "",
     items: [] as { url: string; date: number }[]
   },
@@ -34,11 +35,16 @@ export default new Vuex.Store({
       const idx = state.items.findIndex(findUrl);
       state.items.splice(idx, 1);
       localStorage.setItem("items", JSON.stringify(state.items));
+    },
+    hideDropdown(state, hideDropdown): void {
+      state.hideDropdown = hideDropdown;
     }
   },
   actions: {
-    addItem({ commit, getters }, { resource, json }): void {
-      if (!getters.hasUrl(json.url)) {
+    toggleItem({ commit, getters }, { resource, json }): void {
+      if (getters.hasUrl(json.url)) {
+        commit("removeItem", json.url);
+      } else {
         const newItem = Object.entries(json).reduce((acc, [key, value]): {} => {
           if (["created", "edited"].includes(key)) return acc;
           if (typeof value !== "string") return acc;

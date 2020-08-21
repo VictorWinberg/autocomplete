@@ -1,13 +1,13 @@
 <template>
   <div class="container">
     <div class="autocomplete-container">
-      <ul class="autocomplete-dropdown-menu" :class="hide && 'hide'">
-        <li>
-          <ul v-for="[key, resource] in Object.entries(resources)" :key="key">
-            <li v-for="(json, idx) in results[key]" :key="idx">
-              <autocomplete-card :resource="resource" :json="json" />
-            </li>
-          </ul>
+      <ul class="autocomplete-dropdown-menu" :class="hideDropdown && 'hide'">
+        <li v-for="({ resource, ...json }, idx) in items" :key="idx">
+          <autocomplete-card
+            :id="`ac-${idx}`"
+            :resource="resource"
+            :json="json"
+          />
         </li>
       </ul>
     </div>
@@ -25,7 +25,7 @@ export default Vue.extend({
   components: { AutocompleteCard },
   data() {
     return {
-      hide: true,
+      selected: -1,
       resources: {
         films: "Film",
         people: "Person",
@@ -37,34 +37,37 @@ export default Vue.extend({
       results: {}
     };
   },
-  computed: mapState(["search"]),
+  computed: {
+    ...mapState(["search", "hideDropdown"]),
+    items(): {}[] {
+      return Object.entries(this.resources).reduce((acc, [key, resource]) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        let res = (this.results as any)[key] as {}[];
+        if (!res) return acc;
+        res = res.map(i => ({ ...i, resource }));
+        return acc.concat(res);
+      }, [] as {}[]);
+    }
+  },
   watch: {
+    hideDropdown() {
+      this.selected = -1;
+    },
     search(newSearch) {
       if (newSearch) {
         this.searchSWAPI(newSearch);
       } else {
         this.results = {};
       }
+      this.selected = -1;
     }
   },
   created() {
     this.searchSWAPI(this.search);
-    window.addEventListener("click", this.outerClick);
+    document.addEventListener("keydown", this.handleKeydown, false);
   },
-  beforeDestroy() {
-    window.removeEventListener("click", this.outerClick);
-  },
+  beforeDestroy() {},
   methods: {
-    outerClick(event: Event) {
-      const target = event.target as HTMLElement;
-      if (target.closest(".autocomplete-container")) {
-        document.body.classList.add("focus");
-        this.hide = false;
-      } else {
-        document.body.classList.remove("focus");
-        this.hide = true;
-      }
-    },
     async searchSWAPI(query: string) {
       if (!query) return;
       const keys = Object.keys(this.resources);
@@ -84,6 +87,22 @@ export default Vue.extend({
       );
       const json = await res.json();
       return json.results;
+    },
+    handleKeydown(event: KeyboardEvent) {
+      if (!["ArrowUp", "ArrowDown", "Escape"].includes(event.code)) return;
+
+      const [min, max] = [0, this.items.length - 1];
+      event.preventDefault();
+
+      if (event.code === "ArrowUp" && this.selected > min) {
+        this.selected--;
+      } else if (event.code === "ArrowDown" && this.selected < max) {
+        this.selected++;
+      } else if (event.code === "Escape") {
+        document.body.click();
+      }
+      const el = document.getElementById(`ac-${this.selected}`);
+      if (el) el.focus();
     }
   }
 });

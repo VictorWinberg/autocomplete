@@ -2,7 +2,7 @@
   <div class="container">
     <form
       class="autocomplete-container autocomplete-form clearfix"
-      @submit="onSubmit"
+      @submit.prevent="onSubmit"
     >
       <input
         id="search"
@@ -31,9 +31,8 @@ export default Vue.extend({
   },
   methods: {
     ...mapMutations(["updateSearch"]),
-    onSubmit(event: Event) {
+    onSubmit() {
       this.updateSearch(this.search);
-      event.preventDefault();
     },
     onChange() {
       this.updateSearch(this.search);
@@ -68,6 +67,7 @@ export default Vue.extend({
     text-transform: uppercase;
     transition: 0.1s background-color linear, 0.1s color linear;
 
+    &:focus,
     &:hover {
       color: $bg-color;
       background: $text-color;

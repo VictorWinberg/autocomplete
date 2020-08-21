@@ -1,8 +1,9 @@
 <template>
   <a
     class="autocomplete-card"
+    href="#"
     :class="hasUrl(json.url) ? 'active' : ''"
-    @click="() => addItem({ resource, json })"
+    @click.prevent="() => toggleItem({ resource, json })"
   >
     <div class="absolute-bottom-right">
       <h1>{{ resource }}</h1>
@@ -57,7 +58,7 @@ export default Vue.extend({
         .filter(i => !!i) as {}[];
     }
   },
-  methods: mapActions(["addItem"])
+  methods: mapActions(["toggleItem"])
 });
 </script>
 
@@ -71,6 +72,11 @@ export default Vue.extend({
 
   &.active {
     background-color: $bg-focus-color;
+  }
+
+  &:focus,
+  &:hover {
+    background-color: lighten($bg-focus-color, 10%);
   }
 }
 </style>
