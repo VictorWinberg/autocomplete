@@ -99,6 +99,7 @@ export default Vue.extend({
       } else if (event.code === "ArrowDown" && this.selected < max) {
         this.selected++;
       } else if (event.code === "Escape") {
+        document.body.focus();
         document.body.click();
       }
       const el = document.getElementById(`ac-${this.selected}`);
@@ -122,6 +123,10 @@ export default Vue.extend({
 
   &.hide {
     display: none;
+  }
+
+  :focus {
+    outline: none;
   }
 }
 
