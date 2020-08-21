@@ -1,5 +1,5 @@
 {
-  "name": "jayway",
+  "name": "autocomplete",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -44,18 +44,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/VictorWinberg/jayway.git"
+    "url": "git+https://github.com/VictorWinberg/autocomplete.git"
   },
   "keywords": [
-    "jayway",
+    "autocomplete",
     "autocomplete"
   ],
   "author": "VictorWinberg",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/VictorWinberg/jayway/issues"
+    "url": "https://github.com/VictorWinberg/autocomplete/issues"
   },
-  "homepage": "https://github.com/VictorWinberg/jayway#readme",
+  "homepage": "https://github.com/VictorWinberg/autocomplete#readme",
   "browserslist": [
     "> 1%",
     "last 2 versions"

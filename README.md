@@ -1,4 +1,4 @@
-# jayway
+# autocomplete
 
 ## Project setup
 

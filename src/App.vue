@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1 class="text-center my-2">Jayway - Autocomplete</h1>
+    <h1 class="text-center my-2">Autocomplete</h1>
     <autocomplete-input />
     <autocomplete-dropdown />
     <div class="flex-grow"></div>
